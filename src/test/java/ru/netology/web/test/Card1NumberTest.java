@@ -5,14 +5,11 @@ import com.codeborne.selenide.Selenide;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import ru.netology.web.data.DataHelper;
-import ru.netology.web.page.DashboardPage;
-import ru.netology.web.page.LoginPage;
-import ru.netology.web.page.TransferPageC1;
-import ru.netology.web.page.TransferPageC2;
+import ru.netology.web.page.*;
 
 // проверка с номерами карт
 public class Card1NumberTest {
-    private String amount = "0";
+    private final String amount = "0";
 
     @BeforeEach
     public void login() {
@@ -33,20 +30,20 @@ public class Card1NumberTest {
         dashboardPage.pageUpdating();
 
         // go to 1-st card transfer page
-        dashboardPage.enterSecondTransferPage();
+        dashboardPage.enterTransferPage(0);
     }
 
     @Test
     public void shouldGoToDashboardPageWithValidCardNumber() {
-        var transferPage = new TransferPageC1();
+        var transferPage = new TransferPage();
         var fromCard = DataHelper.getFromC1();
-        transferPage.validTransaction(amount);
+        transferPage.validTransaction(amount, fromCard.getFromCard());
     }
 
     // none card number
     @Test
     public void shouldAppearErrorNotificationWithNoneCardNumber() {
-        var transferPage = new TransferPageC1();
+        var transferPage = new TransferPage();
         var fromCard = "";
         transferPage.invalidTransaction(amount, fromCard);
     }
@@ -54,7 +51,7 @@ public class Card1NumberTest {
     // not completely filled card number
     @Test
     public void shouldAppearErrorNotificationWithNotCompletelyFilledNumber() {
-        var transferPage = new TransferPageC1();
+        var transferPage = new TransferPage();
         var fromCard = "5559000000";
         transferPage.invalidTransaction(amount, fromCard);
     }
@@ -62,15 +59,16 @@ public class Card1NumberTest {
     // full invalid card number
     @Test
     public void shouldAppearErrorNotificationWithInvalidCardNumber() {
-        var transferPage = new TransferPageC1();
+        var transferPage = new TransferPage();
         var fromCard = "0000000000000000";
         transferPage.invalidTransaction(amount, fromCard);
     }
 
     // transfer from "fromCard"
+    // должен упасть
     @Test
     public void shouldAppearErrorNotificationWithTheSameCards() {
-        var transferPage = new TransferPageC1();
+        var transferPage = new TransferPage();
         var fromCard = DataHelper.getFromC2(); // 5559 0000 0000 0001
         transferPage.invalidTransaction(amount, fromCard.getFromCard());
     }

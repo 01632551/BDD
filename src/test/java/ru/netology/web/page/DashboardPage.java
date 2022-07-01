@@ -35,17 +35,12 @@ public class DashboardPage {
         return Integer.parseInt(value);
     }
 
-    public TransferPageC1 enterFirstTransferPage () {
-        topUpBalanceButtons.get(0).click();
-        return new TransferPageC1();
-    }
-
-    public TransferPageC2 enterSecondTransferPage () {
-        topUpBalanceButtons.get(1).click();
-        return new TransferPageC2();
-    }
-
     public void pageUpdating() {
         updateButton.click();
+    }
+
+    public TransferPage enterTransferPage (int num) {
+        topUpBalanceButtons.get(num).click();
+        return new TransferPage();
     }
 }
