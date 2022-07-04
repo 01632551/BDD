@@ -1,10 +1,14 @@
 package ru.netology.web.AuxiliaryMethods;
 
+import ru.netology.web.data.DataHelper;
 import ru.netology.web.page.DashboardPage;
 import ru.netology.web.page.TransferPage;
 
 
 public class EqualizationOfBalance {
+
+    private final DataHelper.TransferC1 fromCard2 = DataHelper.getFromC1();
+    private final DataHelper.TransferC2 fromCard1 = DataHelper.getFromC2();
 
     private DashboardPage dashboard = new DashboardPage();
 
@@ -17,11 +21,11 @@ public class EqualizationOfBalance {
         if (delta >= 0) {
             dashboard.enterTransferPage(1);
             var transferPage = new TransferPage();
-            transferPage.validTransaction(Integer.toString(delta), "5559000000000001"); // from 1-st to 2-nd
+            transferPage.validTransaction(Integer.toString(delta), fromCard1.getFromCard()); // from 1-st to 2-nd
         } else {
             dashboard.enterTransferPage(0);
             var transferPage = new TransferPage();
-            transferPage.validTransaction(Integer.toString(delta), "5559000000000002"); // from 2-nd to 1-st
+            transferPage.validTransaction(Integer.toString(delta), fromCard2.getFromCard()); // from 2-nd to 1-st
         }
 
         dashboard.pageUpdating();
