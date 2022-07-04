@@ -11,10 +11,10 @@ import static com.codeborne.selenide.Selenide.$$;
 import static java.time.Duration.*;
 
 public class DashboardPage {
-    private SelenideElement header = $("[data-test-id=dashboard]");
-    private ElementsCollection topUpBalanceButtons = $$("[data-test-id=action-deposit]");
-    private ElementsCollection cards = $$(".list__item div");
-    private SelenideElement updateButton = $("[data-test-id=action-reload]");
+    private final SelenideElement header = $("[data-test-id=dashboard]");
+    private final ElementsCollection topUpBalanceButtons = $$("[data-test-id=action-deposit]");
+    private final ElementsCollection cards = $$(".list__item div");
+    private final SelenideElement updateButton = $("[data-test-id=action-reload]");
 
     private final String balanceStart = ", баланс: ";
     private final String balanceFinish = " р.";

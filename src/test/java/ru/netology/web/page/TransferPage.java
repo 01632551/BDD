@@ -2,7 +2,6 @@ package ru.netology.web.page;
 
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.SelenideElement;
-import org.openqa.selenium.Keys;
 
 import static com.codeborne.selenide.Selenide.$;
 
@@ -15,9 +14,7 @@ public class TransferPage {
 
     public void transferMoney(String amount, String fromCardNumber){
         amountField.doubleClick();
-//        amountField.sendKeys(Keys.BACK_SPACE);
         amountField.setValue(amount);
-//        fromField.sendKeys(Keys.BACK_SPACE);
         fromField.setValue(fromCardNumber);
         transferButton.click();
     }

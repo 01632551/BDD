@@ -4,15 +4,13 @@ import com.codeborne.selenide.Configuration;
 import com.codeborne.selenide.Selenide;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import ru.netology.web.AuxiliaryMrthods.EqualizationOfBalance;
+import ru.netology.web.AuxiliaryMethods.EqualizationOfBalance;
 import ru.netology.web.data.DataHelper;
 import ru.netology.web.page.*;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class MoneyTransferTest {
-    private final String fromC1number = "5559000000000001";
-    private final String fromC2number = "5559000000000002";
 
     // BUGS: 1 - transfer of sum that bigger than balance (negative other balance);
     // 2 - not throw exception while transfer the same cards;
@@ -55,7 +53,7 @@ public class MoneyTransferTest {
         var dashboardPage = new DashboardPage();
         dashboardPage.enterTransferPage(0);
         var transferPage = new TransferPage();
-        transferPage.validTransaction("110000", fromC2number);
+        transferPage.validTransaction("110000", "5559000000000002");
         assertEquals(120000, dashboardPage.getCardBalance(0));
         assertEquals(-100000, dashboardPage.getCardBalance(1));
     }
@@ -65,7 +63,7 @@ public class MoneyTransferTest {
         var dashboardPage = new DashboardPage();
         dashboardPage.enterTransferPage(1);
         var transferPage = new TransferPage();
-        transferPage.validTransaction("110000", fromC1number);
+        transferPage.validTransaction("110000", "5559000000000001");
         assertEquals(120000, dashboardPage.getCardBalance(1));
         assertEquals(-100000, dashboardPage.getCardBalance(0));
     }
@@ -76,7 +74,7 @@ public class MoneyTransferTest {
         var dashboardPage = new DashboardPage();
         dashboardPage.enterTransferPage(0);
         var transferPage = new TransferPage();
-        transferPage.validTransaction("1001", fromC2number);
+        transferPage.validTransaction("1001", "5559000000000002");
         assertEquals(11001, dashboardPage.getCardBalance(0));
         assertEquals(8999, dashboardPage.getCardBalance(1));
     }
@@ -86,7 +84,7 @@ public class MoneyTransferTest {
         var dashboardPage = new DashboardPage();
         dashboardPage.enterTransferPage(1);
         var transferPage = new TransferPage();
-        transferPage.validTransaction("1001", fromC1number);
+        transferPage.validTransaction("1001", "5559000000000001");
         assertEquals(11001, dashboardPage.getCardBalance(1));
         assertEquals(8999, dashboardPage.getCardBalance(0));
     }
@@ -100,7 +98,7 @@ public class MoneyTransferTest {
         var dashboardPage = new DashboardPage();
         dashboardPage.enterTransferPage(0);
         var transferPage = new TransferPage();
-        transferPage.validTransaction("100.50", fromC2number);
+        transferPage.validTransaction("100.50", "5559000000000002");
         assertEquals(10100.50, dashboardPage.getCardBalance(0));
         assertEquals(9899.50, dashboardPage.getCardBalance(1));
     }
@@ -110,7 +108,7 @@ public class MoneyTransferTest {
         var dashboardPage = new DashboardPage();
         dashboardPage.enterTransferPage(1);
         var transferPage = new TransferPage();
-        transferPage.validTransaction("100.50", fromC1number);
+        transferPage.validTransaction("100.50", "5559000000000001");
         assertEquals(10100.50, dashboardPage.getCardBalance(1));
         assertEquals(9899.50, dashboardPage.getCardBalance(0));
     }
